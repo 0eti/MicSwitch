@@ -156,9 +156,8 @@ namespace MicSwitch.MainWindow.ViewModels
                 .SubscribeToErrors(Log.HandleUiException)
                 .AddTo(Anchors);
 
-            this.WhenAnyValue(x => x.WindowState)
-                .SubscribeSafe(x => ShowInTaskbar = x != WindowState.Minimized, Log.HandleUiException)
-                .AddTo(Anchors);
+            // keep the taskbar button while minimized so the window can be restored from the taskbar, not only from the tray
+            ShowInTaskbar = true;
             
             viewController
                 .WhenClosing
