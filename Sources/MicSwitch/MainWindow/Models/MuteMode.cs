@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -7,11 +7,11 @@ namespace MicSwitch.MainWindow.Models
     [JsonConverter(typeof(StringEnumConverter))]
     internal enum MuteMode
     {
-        [Description("Toggle Mute state on Hotkey press")]
+        [Description("단축키를 누를 때마다 음소거 켜기/끄기")]
         ToggleMute,
-        [Description("Unmute microphone while Hotkey is held")]
+        [Description("단축키를 누르고 있는 동안만 마이크 켜기")]
         PushToTalk,
-        [Description("Mute microphone while Hotkey is held")]
+        [Description("단축키를 누르고 있는 동안만 마이크 끄기")]
         PushToMute
     }
 }

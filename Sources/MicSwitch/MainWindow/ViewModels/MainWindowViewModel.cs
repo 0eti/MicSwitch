@@ -219,7 +219,7 @@ namespace MicSwitch.MainWindow.ViewModels
                         {
                             Log.Debug($"StartMinimized option is not active - showing window as Normal, current state: {WindowState}");
                             StartMinimized = false;
-                            viewController.Show();
+                            ShowMainWindow();
                         }
                     }, Log.HandleUiException)
                 .AddTo(Anchors);
@@ -412,12 +412,26 @@ namespace MicSwitch.MainWindow.ViewModels
             Application.Current.Shutdown();
         }
 
+        private void ShowMainWindow()
+        {
+            try
+            {
+                viewController.Show();
+            }
+            catch (Win32Exception e)
+            {
+                // Windows may refuse to bring the window to the foreground (e.g. right after logon a toast notification owns it)
+                // the window itself is already shown at this point, so this is not fatal
+                Log.Warn($"Failed to bring main window to foreground: {e.Message}");
+            }
+        }
+
         private async Task ShowAppCommandExecuted()
         {
             if (Visibility != Visibility.Visible)
             {
                 Log.Debug($"Showing application, currents state: {Visibility}");
-                viewController.Show();
+                ShowMainWindow();
             }
             else
             {
@@ -514,13 +528,13 @@ namespace MicSwitch.MainWindow.ViewModels
 
             var op = new OpenFileDialog
             {
-                Title = "Select an image", 
+                Title = "알림음 파일 선택", 
                 InitialDirectory = !string.IsNullOrEmpty(LastOpenedDirectory) && Directory.Exists(LastOpenedDirectory) 
                     ? LastOpenedDirectory
                     : Environment.GetFolderPath(Environment.SpecialFolder.CommonMusic),
                 CheckPathExists = true,
                 Multiselect = false,
-                Filter = "All supported sound files|*.wav;*.mp3|All files|*.*"
+                Filter = "지원하는 소리 파일|*.wav;*.mp3|모든 파일|*.*"
             };
 
             if (op.ShowDialog() != true)
@@ -541,13 +555,13 @@ namespace MicSwitch.MainWindow.ViewModels
             var initialDirectory = string.Empty;
             var op = new OpenFileDialog
             {
-                Title = "Select an icon", 
+                Title = "아이콘 선택", 
                 InitialDirectory = !string.IsNullOrEmpty(initialDirectory) && Directory.Exists(initialDirectory) 
                     ? initialDirectory
                     : Environment.GetFolderPath(Environment.SpecialFolder.CommonPictures),
                 CheckPathExists = true,
                 Multiselect = false,
-                Filter = "All supported graphics|*.jpg;*.jpeg;*.png;*.bmp;*.gif|All files|*.*"
+                Filter = "지원하는 이미지 파일|*.jpg;*.jpeg;*.png;*.bmp;*.gif|모든 파일|*.*"
             };
 
             if (op.ShowDialog() != true)

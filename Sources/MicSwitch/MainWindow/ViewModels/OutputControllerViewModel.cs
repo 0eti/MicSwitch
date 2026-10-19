@@ -1,4 +1,4 @@
-using MicSwitch.Modularity;
+﻿using MicSwitch.Modularity;
 using MicSwitch.Services;
 using PoeShared.Audio.Models;
 
@@ -21,11 +21,11 @@ namespace MicSwitch.MainWindow.ViewModels
             IConfigProvider<MicSwitchVolumeControlConfig> hotkeyConfigProvider,
             [Dependency(WellKnownSchedulers.UI)] IScheduler uiScheduler) : base(deviceProvider, deviceControllerFactory.Create(deviceProvider), hotkeyTrackerFactory, hotkeyEditorFactory, hotkeyConfigProvider, uiScheduler)
         {
-            HotkeyToggleMute = PrepareHotkey("Mute/Un-mute", x => x.HotkeyForToggle, (config, hotkeyConfig) => config.HotkeyForToggle = hotkeyConfig);
-            HotkeyMute = PrepareHotkey("Mute", x => x.HotkeyForMute, (config, hotkeyConfig) => config.HotkeyForMute = hotkeyConfig);
-            HotkeyUnmute = PrepareHotkey("Un-mute", x => x.HotkeyForUnmute, (config, hotkeyConfig) => config.HotkeyForUnmute = hotkeyConfig);
-            HotkeyVolumeDown = PrepareHotkey("Volume Down", x => x.HotkeyForVolumeDown, (config, hotkeyConfig) => config.HotkeyForVolumeDown = hotkeyConfig);
-            HotkeyVolumeUp = PrepareHotkey("Volume Up", x => x.HotkeyForVolumeUp, (config, hotkeyConfig) => config.HotkeyForVolumeUp = hotkeyConfig);
+            HotkeyToggleMute = PrepareHotkey("음소거/해제", x => x.HotkeyForToggle, (config, hotkeyConfig) => config.HotkeyForToggle = hotkeyConfig);
+            HotkeyMute = PrepareHotkey("음소거", x => x.HotkeyForMute, (config, hotkeyConfig) => config.HotkeyForMute = hotkeyConfig);
+            HotkeyUnmute = PrepareHotkey("음소거 해제", x => x.HotkeyForUnmute, (config, hotkeyConfig) => config.HotkeyForUnmute = hotkeyConfig);
+            HotkeyVolumeDown = PrepareHotkey("볼륨 내리기", x => x.HotkeyForVolumeDown, (config, hotkeyConfig) => config.HotkeyForVolumeDown = hotkeyConfig);
+            HotkeyVolumeUp = PrepareHotkey("볼륨 올리기", x => x.HotkeyForVolumeUp, (config, hotkeyConfig) => config.HotkeyForVolumeUp = hotkeyConfig);
 
             hotkeyConfigProvider.ListenTo(x => x.IsEnabled)
                 .ObserveOn(uiScheduler)

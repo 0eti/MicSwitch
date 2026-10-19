@@ -7,7 +7,7 @@ using System.Windows;
 [assembly: InternalsVisibleTo("MicSwitch.Tests")]
 
 [assembly: AssemblyProduct("MicSwitch")]
-[assembly: AssemblyVersion("0.0.0.0")]
-[assembly: AssemblyFileVersion("0.0.0.0")]
+[assembly: AssemblyVersion("1.0.254.0")]
+[assembly: AssemblyFileVersion("1.0.254.0")]
 [assembly: AssemblyMetadata("SquirrelAwareVersion", "1")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows10.0.20348.0")]

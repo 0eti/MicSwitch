@@ -27,12 +27,12 @@ internal sealed class MicrophoneControllerViewModel : MediaControllerBase<MicSwi
         [Dependency(WellKnownSchedulers.UI)] IScheduler uiScheduler) : base(deviceProvider, deviceControllerFactory.Create(deviceProvider), hotkeyTrackerFactory, hotkeyEditorFactory, hotkeyConfigProvider, uiScheduler)
     {
         this.configProvider = configProvider;
-        Hotkey = PrepareHotkey("Mute/Un-mute microphone", x => x.Hotkey, (config, hotkeyConfig) => config.Hotkey = hotkeyConfig);
-        HotkeyToggle = PrepareHotkey("Toggle microphone state", x => x.HotkeyForToggle, (config, hotkeyConfig) => config.HotkeyForToggle = hotkeyConfig);
-        HotkeyMute = PrepareHotkey("Mute microphone", x => x.HotkeyForMute, (config, hotkeyConfig) => config.HotkeyForMute = hotkeyConfig);
-        HotkeyUnmute = PrepareHotkey("Un-mute microphone", x => x.HotkeyForUnmute, (config, hotkeyConfig) => config.HotkeyForUnmute = hotkeyConfig);
-        HotkeyPushToMute = PrepareHotkey("Push-To-Mute", x => x.HotkeyForPushToMute, (config, hotkeyConfig) => config.HotkeyForPushToMute = hotkeyConfig);
-        HotkeyPushToTalk = PrepareHotkey("Push-To-Talk", x => x.HotkeyForPushToTalk, (config, hotkeyConfig) => config.HotkeyForPushToTalk = hotkeyConfig);
+        Hotkey = PrepareHotkey("마이크 음소거/해제", x => x.Hotkey, (config, hotkeyConfig) => config.Hotkey = hotkeyConfig);
+        HotkeyToggle = PrepareHotkey("마이크 상태 전환", x => x.HotkeyForToggle, (config, hotkeyConfig) => config.HotkeyForToggle = hotkeyConfig);
+        HotkeyMute = PrepareHotkey("마이크 음소거", x => x.HotkeyForMute, (config, hotkeyConfig) => config.HotkeyForMute = hotkeyConfig);
+        HotkeyUnmute = PrepareHotkey("마이크 음소거 해제", x => x.HotkeyForUnmute, (config, hotkeyConfig) => config.HotkeyForUnmute = hotkeyConfig);
+        HotkeyPushToMute = PrepareHotkey("눌러서 음소거", x => x.HotkeyForPushToMute, (config, hotkeyConfig) => config.HotkeyForPushToMute = hotkeyConfig);
+        HotkeyPushToTalk = PrepareHotkey("눌러서 말하기", x => x.HotkeyForPushToTalk, (config, hotkeyConfig) => config.HotkeyForPushToTalk = hotkeyConfig);
          
         PrepareTracker(HotkeyMode.Click, HotkeyToggle)
             .ObservableForProperty(x => x.IsActive, skipInitial: true)

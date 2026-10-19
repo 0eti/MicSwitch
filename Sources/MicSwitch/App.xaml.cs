@@ -86,7 +86,7 @@ namespace MicSwitch
             var assemblyName = Assembly.GetExecutingAssembly().GetName();
             var window = MainWindow;
             var title = $"{assemblyName.Name} v{assemblyName.Version}";
-            var message = "Application is already running !";
+            var message = "MicSwitch가 이미 실행 중입니다!";
             if (window != null)
             {
                 MessageBox.Show(window, message, title, MessageBoxButton.OK, MessageBoxImage.Warning);

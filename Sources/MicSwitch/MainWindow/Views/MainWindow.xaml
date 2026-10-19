@@ -82,9 +82,9 @@
                             DoubleClickCommand="{Binding ShowAppCommand}">
                 <tb:TaskbarIcon.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Show main window" Command="{Binding ShowAppCommand}" />
+                        <MenuItem Header="메인 창 열기" Command="{Binding ShowAppCommand}" />
                         <Separator />
-                        <MenuItem Header="Exit app" Command="{Binding ExitAppCommand}" />
+                        <MenuItem Header="종료" Command="{Binding ExitAppCommand}" />
                     </ContextMenu>
                 </tb:TaskbarIcon.ContextMenu>
 
@@ -96,11 +96,11 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <st:AutoGrid Columns="120,*" ChildMargin="5" RowHeight="32">
                     <TextBlock Style="{StaticResource SettingsLabelStyle}" st:AutoGrid.RowHeightOverride="40"
-                               Text="Microphone:" />
+                               Text="마이크:" />
                     <st:StackPanel st:AutoGrid.RowHeightOverride="40" Orientation="Horizontal" >
                         <editors:AutoCompleteComboBox st:StackPanel.Fill="Fill"
                                                       HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                                                      ToolTip="Microphone line"
+                                                      ToolTip="마이크 장치"
                                                       Provider="{Binding MicrophoneController.KnownDevices}"
                                                       Text="{Binding MicrophoneController.DeviceId.Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                       SelectedItem="{Binding MicrophoneController.DeviceId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -112,13 +112,13 @@
                         </editors:AutoCompleteComboBox>
                         <TextBlock Style="{StaticResource WarningIconTextBlock}" Margin="2.5,0,0,0"
                                    Visibility="{Binding MicrophoneController.Controller.IsConnected, Converter={StaticResource TrueToCollapsedFalseToVisibleConverter}}"
-                                   ToolTip="Not connected" />
+                                   ToolTip="연결되지 않음" />
                     </st:StackPanel>
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Mute:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="음소거:" />
                     <st:StackPanel IsEnabled="{Binding MicrophoneController.Controller.IsConnected}">
                         <CheckBox
-                            ToolTip="Mute microphone on system-level"
+                            ToolTip="시스템 전체에서 마이크 음소거"
                             HorizontalAlignment="Left"
                             Command="{Binding MicrophoneController.MuteCommand}"
                             CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
@@ -133,11 +133,11 @@
                                         FontSize="18" />
                     </st:StackPanel>
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Microphone volume:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="마이크 볼륨:" />
                     <st:StackPanel
                         IsEnabled="{Binding MicrophoneController.Controller.IsConnected}">
                         <CheckBox
-                            ToolTip="Enable microphone volume control"
+                            ToolTip="마이크 볼륨 조절 사용"
                             HorizontalAlignment="Left"
                             IsChecked="{Binding MicrophoneController.VolumeControlIsEnabled}" />
 
@@ -157,18 +157,18 @@
                         </TextBlock>
                         <TextBlock Style="{StaticResource WarningIconTextBlock}" Margin="2.5,0,0,0"
                                    Visibility="{Binding MicrophoneController.VolumeControlIsEnabled, Converter={StaticResource TrueToCollapsedFalseToVisibleConverter}}"
-                                   ToolTip="May be inaccurate because Volume control is disabled" />
+                                   ToolTip="볼륨 조절이 꺼져 있어서 정확하지 않을 수 있음" />
                     </st:StackPanel>
 
                     <Separator Grid.ColumnSpan="2" />
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Notification:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="알림음:" />
                     <st:StackPanel>
-                        <TextBlock Text="when muted" />
+                        <TextBlock Text="음소거 시" />
                         <ContentPresenter Width="22" Height="22" 
                                           Content="{Binding AudioSelectorWhenMuted}"
                                           ContentTemplate="{StaticResource AudioNotificationSelectorButtonTemplate}" />
-                        <TextBlock Text="when un-muted " />
+                        <TextBlock Text="음소거 해제 시 " />
                         <ContentPresenter Width="22" Height="22" 
                                           Content="{Binding AudioSelectorWhenUnmuted}"
                                           ContentTemplate="{StaticResource AudioNotificationSelectorButtonTemplate}" />
@@ -177,19 +177,19 @@
                                       MinWidth="90"
                                       HorizontalContentAlignment="Left"
                                       Icon="&#xf115;"
-                                      Content="Load..."
-                                      ToolTip="Load custom notification sound"
+                                      Content="불러오기..."
+                                      ToolTip="원하는 알림음 파일 불러오기"
                                       Margin="0" />
                     </st:StackPanel>
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Notification volume:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="알림음 볼륨:" />
                     <st:StackPanel>
                         <Slider Width="160"
                                 Value="{Binding AudioNotificationVolume}"
                                 Minimum="0" Maximum="1"
                                 Margin="0,2,5,0"
                                 TickFrequency="0.05"
-                                ToolTip="Notification volume"/>
+                                ToolTip="알림음 볼륨"/>
                         <TextBlock
                             MinWidth="45">
                             <TextBlock.Text>
@@ -199,11 +199,11 @@
                         <eye:ButtonEx Command="{Binding PlaySoundCommand}"
                                       Icon="&#xf144;"
                                       Padding="0"
-                                      Content="Test"
+                                      Content="테스트"
                                       Margin="0" />
                     </st:StackPanel>
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Output device:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="출력 장치:" />
                     <st:StackPanel>
                         <ContentControl st:StackPanel.Fill="Fill" 
                                         Content="{Binding WaveOutDeviceSelector}" />
@@ -211,38 +211,38 @@
 
                     <Separator Grid.ColumnSpan="2" />
                     
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Show overlay:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="오버레이 표시:" />
                     <st:StackPanel>
                         <RadioButton
                             VerticalContentAlignment="Center"
                             IsChecked="{Binding Overlay.OverlayVisibilityMode, Converter={StaticResource EqualToTrueConverter}, ConverterParameter={x:Static models:OverlayVisibilityMode.Always}}"
-                            Content="Always" 
-                            ToolTip="Always show overlay regardless of microphone state"/>
+                            Content="항상" 
+                            ToolTip="마이크 상태와 관계없이 항상 오버레이 표시"/>
                         <RadioButton
                             VerticalContentAlignment="Center"
                             IsChecked="{Binding Overlay.OverlayVisibilityMode, Converter={StaticResource EqualToTrueConverter}, ConverterParameter={x:Static models:OverlayVisibilityMode.WhenMuted}}"
-                            Content="When muted"
-                            ToolTip="Show overlay only when microphone is muted"/>
+                            Content="음소거 시"
+                            ToolTip="마이크가 음소거됐을 때만 오버레이 표시"/>
                         <RadioButton
                             VerticalContentAlignment="Center"
                             IsChecked="{Binding Overlay.OverlayVisibilityMode, Converter={StaticResource EqualToTrueConverter}, ConverterParameter={x:Static models:OverlayVisibilityMode.WhenUnmuted}}"
-                            Content="When un-muted" 
-                            ToolTip="Show overlay only when microphone is active"/>
+                            Content="음소거 해제 시" 
+                            ToolTip="마이크가 켜져 있을 때만 오버레이 표시"/>
                         <RadioButton
                             VerticalContentAlignment="Center"
                             IsChecked="{Binding Overlay.OverlayVisibilityMode, Converter={StaticResource EqualToTrueConverter}, ConverterParameter={x:Static models:OverlayVisibilityMode.Never}}"
-                            Content="Hide"
-                            ToolTip="Never show overlay"/>
+                            Content="숨김"
+                            ToolTip="오버레이를 표시하지 않음"/>
                     </st:StackPanel>
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Icon:"
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="아이콘:"
                                IsEnabled="{Binding ShowOverlaySettings}" />
                     <st:StackPanel IsEnabled="{Binding ShowOverlaySettings}">
-                        <TextBlock Text="when muted" />
+                        <TextBlock Text="음소거 시" />
                         <Border Width="22" Height="22" BorderBrush="{DynamicResource SecondaryHueMidBrush}" BorderThickness="1"
                                 Background="Transparent"
                                 Cursor="Hand"
-                                ToolTip="Click to select an icon for muted state">
+                                ToolTip="클릭해서 음소거 상태 아이콘 선택">
                             <Image
                                 gif:ImageBehavior.RepeatBehavior="Forever"
                                 gif:ImageBehavior.AnimatedSource="{Binding ImageProvider.MutedMicrophoneImage}" />
@@ -252,11 +252,11 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Border>
-                        <TextBlock Text="when un-muted " />
+                        <TextBlock Text="음소거 해제 시 " />
                         <Border Width="22" Height="22" BorderBrush="{DynamicResource SecondaryHueMidBrush}" BorderThickness="1"
                                 Background="Transparent"
                                 Cursor="Hand"
-                                ToolTip="Click to select an icon for un-muted state">
+                                ToolTip="클릭해서 음소거 해제 상태 아이콘 선택">
                             <Image gif:ImageBehavior.RepeatBehavior="Forever"
                                    gif:ImageBehavior.AnimatedSource="{Binding ImageProvider.StreamingMicrophoneImage}" />
                             <i:Interaction.Triggers>
@@ -268,59 +268,59 @@
                         <eye:ButtonEx Command="{Binding ResetMicrophoneIconsCommand}"
                                       Icon="&#xf0e2;"
                                       Margin="0"
-                                      Content="Reset icons" />
+                                      Content="아이콘 초기화" />
                     </st:StackPanel>
 
                     <Separator Grid.ColumnSpan="2" />
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Mute mode:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="음소거 방식:" />
                     <st:StackPanel>
                         <RadioButton
                             VerticalContentAlignment="Center"
-                            ToolTip="Toggle Mute state on Hotkey press"
+                            ToolTip="단축키를 누를 때마다 음소거 켜기/끄기"
                             IsChecked="{Binding MicrophoneController.MuteMode, Converter={StaticResource EqualToTrueConverter}, ConverterParameter={x:Static models:MuteMode.ToggleMute}}"
-                            Content="Toggle" />
+                            Content="전환" />
                         <RadioButton
                             VerticalContentAlignment="Center"
-                            ToolTip="Un-mute microphone while Hotkey is held"
+                            ToolTip="단축키를 누르고 있는 동안만 마이크 켜기"
                             IsChecked="{Binding MicrophoneController.MuteMode, Converter={StaticResource EqualToTrueConverter}, ConverterParameter={x:Static models:MuteMode.PushToTalk}}"
-                            Content="Push-To-Talk" />
+                            Content="눌러서 말하기" />
                         <RadioButton
                             VerticalContentAlignment="Center"
-                            ToolTip="Mute microphone while Hotkey is held"
+                            ToolTip="단축키를 누르고 있는 동안만 마이크 끄기"
                             IsChecked="{Binding MicrophoneController.MuteMode, Converter={StaticResource EqualToTrueConverter}, ConverterParameter={x:Static models:MuteMode.PushToMute}}"
-                            Content="Push-To-Mute" />
+                            Content="눌러서 음소거" />
                     </st:StackPanel>
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Initial state:"
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="시작 시 상태:"
                                IsEnabled="{Binding MicrophoneController.MuteMode, Converter={StaticResource EqualToTrueConverter}, ConverterParameter={x:Static models:MuteMode.ToggleMute}}" />
                     <st:StackPanel
                         IsEnabled="{Binding MicrophoneController.MuteMode, Converter={StaticResource EqualToTrueConverter}, ConverterParameter={x:Static models:MuteMode.ToggleMute}}">
                         <RadioButton
                             VerticalContentAlignment="Center"
-                            ToolTip="Do not change microphone state on app startup"
+                            ToolTip="앱을 시작할 때 마이크 상태를 바꾸지 않음"
                             IsChecked="{Binding MicrophoneController.InitialMicrophoneState, Converter={StaticResource EqualToTrueConverter}, ConverterParameter={x:Static models:MicrophoneState.Any}}"
-                            Content="Do not change" />
+                            Content="그대로 두기" />
                         <RadioButton
                             VerticalContentAlignment="Center"
-                            ToolTip="Mute microphones on app startup"
+                            ToolTip="앱을 시작할 때 마이크 음소거"
                             IsChecked="{Binding MicrophoneController.InitialMicrophoneState, Converter={StaticResource EqualToTrueConverter}, ConverterParameter={x:Static models:MicrophoneState.Mute}}"
-                            Content="Mute" />
+                            Content="음소거" />
                         <RadioButton
                             VerticalContentAlignment="Center"
-                            ToolTip="Un-mute microphones on app startup"
+                            ToolTip="앱을 시작할 때 마이크 음소거 해제"
                             IsChecked="{Binding MicrophoneController.InitialMicrophoneState, Converter={StaticResource EqualToTrueConverter}, ConverterParameter={x:Static models:MicrophoneState.Unmute}}"
-                            Content="Un-mute" />
+                            Content="음소거 해제" />
                     </st:StackPanel>
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Hotkey:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="단축키:" />
                     <ContentPresenter Content="{Binding MicrophoneController.Hotkey}"
                                       st:AutoGrid.RowHeightOverride="50" />
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Additional hotkeys:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="추가 단축키:" />
                     <CheckBox
                         HorizontalAlignment="Left"
-                        ToolTip="Enable additional hotkeys for more in-depth configuration"
+                        ToolTip="더 세부적으로 설정할 수 있는 추가 단축키 사용"
                         IsChecked="{Binding MicrophoneController.IsEnabled, Mode=TwoWay}" />
 
                     <st:AutoGrid RowHeightOverride="Auto"
@@ -328,28 +328,28 @@
                                  ColumnSpan="2"
                                  Columns="120,*" ChildMargin="5" RowHeight="50"
                                  Visibility="{Binding MicrophoneController.IsEnabled, Converter={StaticResource TrueToVisibleFalseToCollapsedConverter}}">
-                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="for Toggle:" />
+                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="전환:" />
                         <ContentControl Content="{Binding MicrophoneController.HotkeyToggle}" />
 
-                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="for Mute:" />
+                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="음소거:" />
                         <ContentControl Content="{Binding MicrophoneController.HotkeyMute}" />
 
-                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="for Un-mute:" />
+                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="음소거 해제:" />
                         <ContentControl Content="{Binding MicrophoneController.HotkeyUnmute}" />
 
-                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="for Push-to-Talk:" />
+                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="눌러서 말하기:" />
                         <ContentControl Content="{Binding MicrophoneController.HotkeyPushToTalk}" />
 
-                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="for Push-to-Mute:" />
+                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="눌러서 음소거:" />
                         <ContentControl Content="{Binding MicrophoneController.HotkeyPushToMute}" />
                     </st:AutoGrid>
 
                     <Separator Grid.ColumnSpan="2" />
                     
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Volume control:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="볼륨 조절:" />
                     <CheckBox
                         HorizontalAlignment="Left"
-                        ToolTip="Enable output devices volume control"
+                        ToolTip="출력 장치 볼륨 조절 사용"
                         IsChecked="{Binding OutputController.IsEnabled, Mode=TwoWay}" />
 
                     <st:AutoGrid RowHeightOverride="Auto"
@@ -357,11 +357,11 @@
                                  ColumnSpan="2"
                                  Columns="120,*" ChildMargin="5" RowHeight="50"
                                  Visibility="{Binding OutputController.IsEnabled, Converter={StaticResource TrueToVisibleFalseToCollapsedConverter}}">
-                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Output device:" />
+                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="출력 장치:" />
                         <st:StackPanel  st:AutoGrid.RowHeightOverride="40" Orientation="Horizontal" >
                             <editors:AutoCompleteComboBox st:StackPanel.Fill="Fill"
                                                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                                                          ToolTip="Output device"
+                                                          ToolTip="출력 장치"
                                                           Provider="{Binding OutputController.KnownDevices}"
                                                           Text="{Binding OutputController.DeviceId.Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                           SelectedItem="{Binding OutputController.DeviceId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -373,16 +373,16 @@
                             </editors:AutoCompleteComboBox>
                             <TextBlock Style="{StaticResource WarningIconTextBlock}" Margin="2.5,0,0,0"
                                        Visibility="{Binding OutputController.Controller.IsConnected, Converter={StaticResource TrueToCollapsedFalseToVisibleConverter}}"
-                                       ToolTip="Not connected" />
+                                       ToolTip="연결되지 않음" />
                         </st:StackPanel>
-                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Output volume:" />
+                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="출력 볼륨:" />
                         <st:StackPanel VerticalAlignment="Center" IsEnabled="{Binding OutputController.Controller.IsConnected}">
                             <Slider Width="160"
                                     Value="{Binding OutputController.Volume}"
                                     Minimum="0" Maximum="1"
                                     Margin="0,2,5,0"
                                     TickFrequency="0.05"
-                                    ToolTip="Volume"/>
+                                    ToolTip="볼륨"/>
                             <TextBlock
                                 MinWidth="45">
                                 <TextBlock.Text>
@@ -390,32 +390,32 @@
                                 </TextBlock.Text>
                             </TextBlock>
                         </st:StackPanel>
-                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="for Toggle:" />
+                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="전환:" />
                         <ContentControl Content="{Binding OutputController.HotkeyToggleMute}" />
-                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="for Mute:" />
+                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="음소거:" />
                         <ContentControl Content="{Binding OutputController.HotkeyMute}" />
-                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="for Un-mute:" />
+                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="음소거 해제:" />
                         <ContentControl Content="{Binding OutputController.HotkeyUnmute}" />
-                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="for Volume Up:" />
+                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="볼륨 올리기:" />
                         <ContentControl Content="{Binding OutputController.HotkeyVolumeUp}" />
-                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="for Volume Down:" />
+                        <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="볼륨 내리기:" />
                         <ContentControl Content="{Binding OutputController.HotkeyVolumeDown}" />
                     </st:AutoGrid>
 
                     <Separator Grid.ColumnSpan="2" />
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Minimize on close:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="닫을 때 최소화:" />
                     <st:StackPanel>
                         <CheckBox
                             HorizontalAlignment="Left"
-                            ToolTip="If enabled application will minimize instead of close when X button is pressed. App still could be closed via taskbar icon"
+                            ToolTip="켜 두면 X 버튼을 눌렀을 때 종료하지 않고 최소화합니다. 종료는 트레이 아이콘에서 할 수 있습니다"
                             IsChecked="{Binding MinimizeOnClose}" />
                     </st:StackPanel>
 
                     <TextBlock Style="{StaticResource SettingsLabelStyle}" 
                                IsEnabled="{Binding ElementName=RunAtLoginCheckbox, Path=IsEnabled}"
-                               Text="Run at start:"
-                               ToolTip="Run application at system startup"/>
+                               Text="자동 실행:"
+                               ToolTip="컴퓨터를 켤 때 자동으로 실행"/>
                     <st:StackPanel Orientation="Horizontal">
                         <CheckBox
                             HorizontalAlignment="Left"
@@ -425,25 +425,25 @@
                             CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}" />
                         <TextBlock Style="{StaticResource WarningIconTextBlock}"
                                    Visibility="{Binding ElementName=RunAtLoginCheckbox, Path=IsEnabled, Converter={StaticResource TrueToCollapsedFalseToVisibleConverter}}"
-                                   ToolTip="This functionality is not available" />
+                                   ToolTip="이 기능은 사용할 수 없습니다" />
                     </st:StackPanel>
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Start minimized:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="시작 시 최소화:" />
                     <st:StackPanel>
                         <CheckBox
                             HorizontalAlignment="Left"
-                            ToolTip="Minimize application window on startup"
+                            ToolTip="시작할 때 창을 띄우지 않고 최소화"
                             IsChecked="{Binding StartMinimized}" />
                     </st:StackPanel>
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Check for updates:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="업데이트 확인:" />
                     <st:StackPanel>
                         <CheckBox
                             HorizontalAlignment="Left"
-                            ToolTip="Periodically check for updates and report if new version is available"
+                            ToolTip="주기적으로 업데이트를 확인하고 새 버전이 있으면 알려줌"
                             IsChecked="{Binding ApplicationUpdater.CheckForUpdates, Mode=TwoWay}" />
                         <TextBlock IsHitTestVisible="True">
-                            <Run Text="source:" />
+                            <Run Text="출처:" />
                             <Hyperlink Command="{Binding ApplicationUpdater.OpenUri}" 
                                        NavigateUri="{Binding ApplicationUpdater.UpdateSource.Uris[0]}"
                                        CommandParameter="{Binding ApplicationUpdater.UpdateSource.Uris[0]}"
@@ -453,7 +453,7 @@
                         </TextBlock>
                     </st:StackPanel>
 
-                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="Contacts:" />
+                    <TextBlock Style="{StaticResource SettingsLabelStyle}" Text="연락처:" />
                     <st:StackPanel>
                         <TextBlock IsHitTestVisible="True">
                             <Run Text="Xab3r via " />
@@ -473,16 +473,16 @@
                         st:AutoGrid.RowHeightOverride="40">
                         <eye:ButtonEx Command="{Binding ResetOverlayPositionCommand}"
                                       Icon="&#xf0e2;"
-                                      Content="Reset overlay" />
+                                      Content="오버레이 초기화" />
                         <Grid DockPanel.Dock="Right" Margin="5,0,0,0">
                             <eye:ButtonEx Command="{Binding ToggleOverlayLockCommand}" Margin="0"
                                           Icon="&#xf09c;"
                                           Visibility="{Binding Overlay.IsLocked, Converter={StaticResource TrueToVisibleFalseToCollapsedConverter}}"
-                                          Content="Unlock overlay" />
+                                          Content="오버레이 잠금 해제" />
                             <eye:ButtonEx Command="{Binding ToggleOverlayLockCommand}" Margin="0"
                                           Icon="&#xf023;"
                                           Visibility="{Binding Overlay.IsLocked, Converter={StaticResource TrueToCollapsedFalseToVisibleConverter}}"
-                                          Content="Lock overlay" />
+                                          Content="오버레이 잠금" />
                         </Grid>
                     </DockPanel>
                 </st:AutoGrid>
@@ -502,7 +502,7 @@
         <mah:WindowCommands ShowSeparators="True">
             <eye:ButtonEx
                 Margin="5,0"
-                ToolTip="Open logs/config folder"
+                ToolTip="로그/설정 폴더 열기"
                 Icon="&#xF07C;"
                 Command="{Binding OpenAppDataDirectoryCommand}" />
         </mah:WindowCommands>
@@ -510,19 +510,19 @@
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands ShowSeparators="True">
-            <StackPanel Orientation="Horizontal" ToolTip="Application is running without Administrator privileges, not all features may work correctly, e.g. global hotkeys"
+            <StackPanel Orientation="Horizontal" ToolTip="관리자 권한 없이 실행 중입니다. 전역 단축키 등 일부 기능이 제대로 동작하지 않을 수 있습니다"
                         Visibility="{Binding IsElevated, Converter={StaticResource TrueToCollapsedFalseToVisibleConverter}}">
                 <materialDesign:PackIcon VerticalAlignment="Center" Kind="ShieldWarning" />
-                <TextBlock Margin="2.5,0,0,0" Text="USER-MODE" />
+                <TextBlock Margin="2.5,0,0,0" Text="일반 권한" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <eye:CachedContentControl Content="{Binding ErrorMonitor}"/>
                 <eye:ButtonEx Command="{Binding ApplicationUpdater.CheckForUpdatesCommand}"
-                              ToolTip="Check for updates"
+                              ToolTip="업데이트 확인"
                               Margin="5,0"
                               Icon="&#xF0ED;" />
                 <eye:ButtonEx Command="{Binding ApplicationUpdater.RestartCommand}"
-                              ToolTip="Restart application"
+                              ToolTip="앱 다시 시작"
                               Margin="5,0"
                               Icon="&#xf021;" />
             </StackPanel>

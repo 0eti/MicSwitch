@@ -1,7 +1,7 @@
 [submodule "Submodules/PoeEye"]
 	path = Submodules/PoeEye
-	url = https://github.com/iXab3r/PoeEye.git
-	branch = MicSwitch
+	url = https://github.com/0eti/PoeEye.git
+	branch = micswitch-ko
 [submodule "Submodules/DeploymentTools"]
 	path = Submodules/DeploymentTools
 	url = https://github.com/iXab3r/DeploymentTools.git

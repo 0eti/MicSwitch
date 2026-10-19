@@ -1,3 +1,34 @@
+> [!IMPORTANT]
+> **비공식 포크입니다.** 이 저장소는 [iXab3r/MicSwitch](https://github.com/iXab3r/MicSwitch)의 비공식 포크이며, 원작자(iXab3r)와 관계가 없습니다.
+> 원본 프로그램의 저작권은 원작자에게 있습니다. 원작자가 요청하면 이 포크는 내려갑니다.
+
+## 수정사항 (1.0.254, 이 포크에서 바뀐 점)
+
+원본 1.0.253을 기준으로 아래 두 가지만 바꿨습니다.
+
+### 1. 시작할 때 "액세스가 거부되었습니다" 오류로 꺼지는 버그 수정
+- **증상:** 컴퓨터를 켤 때 자동 실행되면 `PInvoke.Win32Exception (5): 액세스가 거부되었습니다` 오류 창이 뜨고 프로그램이 꺼짐. 다시 켜면 정상 동작함.
+- **원인:** 시작할 때 메인 창을 맨 앞으로 가져오려고(`SetForegroundWindow` → `AttachThreadInput`) 하는데, 로그인 직후에는 Windows 알림 창 같은 시스템 창이 맨 앞에 있어서 Windows가 이를 거부함. 이 예외가 치명적 오류로 처리되어 앱이 종료됨.
+- **수정:** 창을 맨 앞으로 가져오는 데 실패하면(`Win32Exception`) 경고 로그만 남기고 계속 실행함. 창은 이미 화면에 표시된 상태라 기능에는 영향이 없음. 시작할 때와 트레이 아이콘으로 창을 열 때 모두 적용. (`MainWindowViewModel.ShowMainWindow`)
+
+### 2. 한글 패치
+- MicSwitch 메인 창, 트레이 메뉴, 단축키 편집, 오버레이, 파일 선택 창을 한국어로 번역.
+- 공용 라이브러리 PoeShared의 오류 보고 창, 업데이트 화면, 알림음 선택 화면과 상태 메시지도 한국어로 번역. PoeShared 수정분은 [0eti/PoeEye `micswitch-ko` 브랜치](https://github.com/0eti/PoeEye/tree/micswitch-ko)에 있습니다.
+
+### 설치
+[Releases](https://github.com/0eti/MicSwitch/releases)에서 받을 수 있습니다. 기존 MicSwitch 설정(`%AppData%\MicSwitch`)은 그대로 사용됩니다.
+
+### 직접 빌드할 때
+```
+git clone https://github.com/0eti/MicSwitch.git
+cd MicSwitch
+git submodule update --init Submodules/PoeEye Submodules/PropertyBinder Submodules/gong-wpf-dragdrop
+InitSymlinks.cmd
+dotnet build Sources\MicSwitch\MicSwitch.csproj -c Release -p:WindowsSdkPackageVersion=10.0.20348.25
+```
+.NET 6 SDK가 필요합니다. `WindowsSdkPackageVersion`을 지정하지 않으면 최신 WinRT 라이브러리가 섞여 실행 시 오류가 날 수 있습니다. `Submodules/DeploymentTools`는 원본 저장소가 비공개라 받을 수 없지만, 빌드에는 필요 없습니다.
+
+---
 ![](https://img.shields.io/github/release-date/iXab3r/MicSwitch.svg) ![](https://img.shields.io/github/downloads/iXab3r/MicSwitch/total.svg) ![](https://img.shields.io/github/last-commit/iXab3r/MicSwitch.svg)
 [![Discord Chat](https://img.shields.io/discord/513749321162686471.svg)](https://discord.gg/BExRm22)  
 
